@@ -43,11 +43,11 @@ jobs:
         run: ${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager --uninstall "cmake;3.10.2.4988404" "cmake;3.18.1"
       - name: set up android ndk r25 (16k support)
         run: |
-          curl -L -s "https://storage.googleapis.com/android-build/builds/aosp-ndk-release-r23-linux-linux/12186248/38c84da1ab0dd31ea40c857d2c9ee77450d9d71d76e60ac2ccd33d379babc534/android-ndk-12186248-linux-x86_64.zip?GoogleAccessId=gcs-sign%40android-builds-project.google.com.iam.gserviceaccount.com&Expires=1776279116&Signature=YPktaGy1tahjAGXwbSXoATlqRdYmCrux59mMl8UcqkC%2FWOO4KXDmUsbEP91erleeQbUdTtSqq4ndK7h9iLGtASWfi5opq4SPS5RdJjIzCSD67tcDSu9gMWwZsXUZNfkXY9FYKweQ2S%2BGMIHmMqtAeA2NRHdRW9ZFFQS0Jc3nVHtcpmtgq7XTFiqgLzG1dhPfBdsmFnN1bpxagolCh4Sl3kjZrPwSELTsh4bxke6vvC7o7Q7r%2FJ42DlBWQXWok%2BcMAIN1u3xF7oHYT9NogvLW5YNkg8AqCGETcucrlHF1f4LYTgjvaFc75RhZtd19ABUDlR9ur8EjMz8z15Uuj3VgWA%3D%3D" -o ndk.zip
+          curl -L -s "https://storage.googleapis.com/android-build/builds/aosp-ndk-r25-release-linux-linux/12161346/ca7222ab71c8d5b8add70c147e6b14b8d05d64ea785766db4b1efe9f70eceba1/android-ndk-12161346-linux-x86_64.zip?GoogleAccessId=gcs-sign%40android-builds-project.google.com.iam.gserviceaccount.com&Expires=1776281740&Signature=nVi0L6HPsrBwgxjbGmBz5LxoPniEoYGay9CO1XgI7zZ3ayiwOS0dwo4l9yYi6Hqxr6bAkFK2uubc0UrtvwhW8TeTuVIFmcNtv9UuWTuOVPPwOIHKEouna6Xwg6%2FnpKo8J15Vx2yk%2FPVSVREgI9HLHp99NxNmqkUK%2Bw4Lwg3lsXjVo5%2BBju7egLwzyCFXZdZa3mCbevVEhEUy1pNPfKBCaXYmTefVP7%2BRWDgjES3fztB6rqZEUvEnrqHkpWN7SCjRmaM6tRBlyMu8F4JrI4VdtuhQw%2FLld4qZKKNh2e%2BZ2ssbgBBz0Tl7aLaRLU1EB6w5CWfp2Jh%2FZnLuUUYpCp%2Bj7w%3D%3D" -o ndk.zip
           unzip -q -o ndk.zip -d .ndk
           echo "ANDROID_NDK_ROOT=$PWD/.ndk/$(ls .ndk)" >> $GITHUB_ENV
       - name: run the build script
-        run: ./android.sh -d --lts --enable-android-media-codec --enable-android-zlib --enable-gpl --enable-x264
+        run: ./android.sh --lts --enable-android-media-codec --enable-android-zlib --enable-gpl --enable-x264
       - name: prepare and upload lts aar
         run: |
           AAR_PATH=$(find prebuilt -type f -name 'ffmpeg-kit.aar')
